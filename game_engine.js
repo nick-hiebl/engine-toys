@@ -11,7 +11,8 @@ var update,
 
 var keyPressed,
     keyReleased,
-    mousePressed;
+    mousePressed,
+    rightMousePressed;
 
 var myFont = {
     face: 'Arial',
@@ -129,8 +130,11 @@ function MOUSE_PRESSED(e) {
     var rect = canvas.getBoundingClientRect();
     var x = e.pageX - rect.left;
     var y = e.pageY - rect.top;
-    if (mousePressed !== undefined) {
+    if (mousePressed !== undefined && e.button !== 2) {
         mousePressed(x, y);
+    }
+    else if (rightMousePressed !== undefined && e.button === 2) {
+        rightMousePressed(x, y);
     }
 }
 
@@ -338,7 +342,15 @@ function rect(x, y, w, h) {
     if (SETTINGS.fill) {
         ctx.fillRect(x-w/2, y-h/2, w, h);
     }
+}
 
+function nRect(x, y, w, h) {
+    if (SETTINGS.stroke) {
+        ctx.strokeRect(x, y, w, h);
+    }
+    if (SETTINGS.fill) {
+        ctx.fillRect(x, y, w, h);
+    }
 }
 
 function ellipse(x, y, w, h) {
@@ -512,6 +524,7 @@ window.onload = function() {
     canvas.addEventListener("mousedown", MOUSE_PRESSED, false);
     canvas.addEventListener("mousemove", MOUSE_MOVE, false);
 
+    canvas.addEventListener("contextmenu", event => event.preventDefault());
 
     ctx = canvas.getContext('2d');
     ctx.imageSmoothingEnabled = false;
