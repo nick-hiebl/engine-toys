@@ -55,9 +55,11 @@ class Quad {
     add_point(p) {
         console.assert(this.contains_point(p), "Quad.add_point passed a point it does not contain.");
         if (this.contains_point(p)) {
-            this._points.push(p);
-            if (!this.parent && this._points.length > this.limit) {
+            if (!this.parent && this._points.length + 1 > this.limit) {
                 this.make_children();
+                this._points = [];
+            } else if (!this.parent) {
+                this._points.push(p);
             }
             if (this.parent) {
                 for (var child of this.children) {
@@ -97,7 +99,10 @@ class Quad {
             if (this.parent) {
                 var total = [];
                 for (var child of this.children) {
-                    total = total.concat(child.query_range(x, y, w, h));
+                    var l = child.query_range(x, y, w, h);
+                    for (var i of l) {
+                        total.push(i);
+                    }
                 }
                 return total;
             }
@@ -121,10 +126,8 @@ var q;
 
 function setup() {
     q = new Quad(0, 0, width, height, 4);
-}
 
-function update() {
-    if (random(1.5) > 1) {
+    for (var i = 0; i < 1000; i ++) {
         var p = {
             x: random(width),
             y: random(height)
@@ -134,8 +137,19 @@ function update() {
     }
 }
 
+function update() {
+    if (random(1.5) > 1) {
+        var p = {
+            x: random(width),
+            y: random(height)
+        };
+
+        //q.add_point(p);
+    }
+}
+
 function mousePressed(x, y) {
-    q.add_point({x: x, y: y});
+    q.add_point({x: x+random(1), y: y+random(1)});
 }
 
 function draw() {
@@ -146,16 +160,19 @@ function draw() {
     stroke(0);
 
     q.draw();
-    var w = h = 100;
+    var w = 140, h = 60;
     //console.log(MOUSE.x, MOUSE.y);
     //console.log(MOUSE.x,  - w/2, MOUSE.y,  - h/2);
     var list = q.query_range(MOUSE.x - w/2, MOUSE.y - h/2, w, h);
     //console.log(list);
 
     for (var p of list) {
-        stroke(255, 0, 0);
-        ellipse(p.x, p.y, 5, 5);
+        //stroke(255, 0, 0);
+        fill(255, 0, 0);
+        SETTINGS.fill = true;
+        ellipse(p.x, p.y, 3, 3);
     }
+    SETTINGS.fill = false;
     stroke(0);
     rect(MOUSE.x, MOUSE.y, w, h);
 }
