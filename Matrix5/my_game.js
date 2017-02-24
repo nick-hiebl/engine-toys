@@ -41,11 +41,9 @@ function symbolDraw(s, x, y) {
     restore();
 }
 function draw() {
-    background(0);
+    background(0, 0.7);
     fill(0, 255, 70);
     fontSize(fSize/1.25);
-    ctx.shadowBlur = fSize/2;
-    ctx.shadowColor = "#00ff70";
     for (var i = 0; i < streams.length; i ++) {
         for (var s of streams[i]) {
             symbolDraw(s, i * fSize*2 + fSize/2, s.y);

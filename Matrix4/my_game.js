@@ -28,12 +28,11 @@ function update() {
     });
 }
 function draw() {
-    background(0);
+    background(0, 0.7);
     fill(0, 255, 70);
     fontSize(fSize/1.25);
-    ctx.shadowBlur = fSize/2;
-    ctx.shadowColor = "#0f7";
     for (var i = 0; i < streams.length; i ++) {
+        var first = true;
         for (var s of streams[i]) {
             centerText(s.char, i * fSize + fSize/2, s.y);
         }
