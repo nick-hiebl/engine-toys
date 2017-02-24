@@ -20,7 +20,7 @@ function update() {
     streams.forEach(function(stream) {
         stream.forEach(function(s) {
             s.y = s.y > height + 30 ? -30 : s.speed + s.y;
-            s.loop = s.loop > 1 ? 0 : s.loopSpeed;
+            s.loop = s.loop > 1 ? 0 : s.loopSpeed + s.loop;
             if (s.loop > 1) {
                 s.char = char();
             }
