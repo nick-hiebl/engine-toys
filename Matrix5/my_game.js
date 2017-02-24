@@ -6,8 +6,8 @@ function char() {
 function setup() {
     fontSize(fSize);
     resize(window.innerWidth, window.innerHeight);
-    for (var x = 0; x < width; x += fSize * 1.25) {
-        var s = [], n = floor(random(5,9)), sp = random(7,20);
+    for (var x = 0; x < width; x += fSize * 2) {
+        var s = [], n = floor(random(5,9)), sp = random(6, 12);
         for (var i = 0; i < n; i ++) {
             s.push({
                 char: char(), y: i * fSize/2, speed: sp, loopSpeed: random(1/50,1/10), loop: 0
@@ -48,7 +48,7 @@ function draw() {
     ctx.shadowColor = "#00ff70";
     for (var i = 0; i < streams.length; i ++) {
         for (var s of streams[i]) {
-            symbolDraw(s, i * fSize*1.25 + fSize/2, s.y);
+            symbolDraw(s, i * fSize*2 + fSize/2, s.y);
         }
     }
 }
