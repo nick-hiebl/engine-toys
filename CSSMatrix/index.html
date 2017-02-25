@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CSS Matrix</title>
+        <style media="screen">
+            #bg{
+                font-family: 'ＭＳ Ｐゴシック', 'MS PGothic', 'メイリオ', Meiryo, sans-serif;
+                font-size: 30px;
+                background: #000;
+                color: rgba(0, 255, 0, .7);
+                top: 0px;
+                left: 0px;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                text-shadow: rgba(255, 255, 255, .6) 0px 0px 4px;
+                position: absolute;
+            }
+            @-webkit-keyframes fadeing{
+                0% { opacity: 0; }
+                20% { opacity: 0.7; }
+                50% { opacity: 1; }
+                70% { opacity: 0.7; }
+                100% { opacity: 0; }
+            }
+            @-webkit-keyframes falling{
+                from {top: -250px;}
+                to {top: 100%;}
+            }
+            #bg div{
+                position: absolute;
+                top: 0;
+                -webkit-animation-name: falling, fadeing;
+                -webkit-animation-timing-function: linear;
+                -webkit-animation-iteration-count: infinite;
+                -webkit-animation-direction: normal;
+                width: 40px;
+                letter-spacing: 20px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id="bg">
+        </div>
+
+        <script type="text/javascript">
+        function floor(x) {
+            return Math.floor(x);
+        }
+        function random() {
+            return Math.random();
+        }
+        </script>
+        <script src="./jquery-3.1.0.min.js"></script>
+        <script type="text/javascript">
+
+        $(document).ready(function() {
+            for (let n = 0; n < 100; n += 100/60) {
+                let temp = $("<div></div>");
+                let s = '';
+                for (let k = 0; k < 12; k ++) {
+                    s = s + String.fromCharCode(Math.floor(Math.random() * (0x30E2 - 0x30A1) + 0x30A1));
+                }
+                temp.text(s);
+                temp.css({'left': n + '%', '-webkit-animation-duration': Math.random() * 10 + 2 + 's'})
+                $('#bg').append(temp);
+            }
+        });
+        </script>
+    </body>
+</html>
