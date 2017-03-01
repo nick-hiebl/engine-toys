@@ -10,7 +10,7 @@ function setup() {
 		var Y = random(-height, 0);
 		var S = random(3, 6);
 		for (var y = 0; y < 300; y += 30) {
-			list.push([x, y + Y, S]);
+			list.push([x, y + Y, S, String.fromCharCode(floor(random(97, 97+26)))]);
 		}
 	}
 }
@@ -24,6 +24,9 @@ function update() {
 
 	for (var p of list) {
 		p[1] += p[2];
+        if (random(100) < 1) {
+            p[3] = String.fromCharCode(floor(random(97, 97+26)));
+        }
 		if (p[1] > height + 50) {
 			p[1] = -10;
 		}
@@ -31,13 +34,13 @@ function update() {
 }
 
 function draw() {
-	background(0, 0.2);
+	background(0, 0.1);
 	stroke(0, 255, 70);
-	fill(0, 255, 70);
-	lineWidth(1);
+	fill(0, 255, 70, 0.4);
+	lineWidth(2);
 	fontSize(30);
 	for (var p of list)
-		text('a', p[0], p[1]);
+		centerText(p[3], p[0] + 10, p[1]);
 	fontSize(10);
 	fill(255);
 	stroke(255);
