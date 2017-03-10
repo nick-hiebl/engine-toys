@@ -59,7 +59,7 @@
             for (let n = 0; n < 100; n += 100/60) {
                 let temp = $("<div></div>");
                 let s = '';
-                for (let k = 0; k < 12; k ++) {
+                for (let k = 0; k < Math.random() * 12 + 6; k ++) {
                     s = s + String.fromCharCode(Math.floor(Math.random() * (0x30E2 - 0x30A1) + 0x30A1));
                 }
                 temp.text(s);

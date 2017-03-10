@@ -9,9 +9,9 @@ function dfs(a, b, seen) {
     if (a === b) {
         return true;
     }
-    var temp = seen.slice();
+    let temp = seen.slice();
     temp[a] = true;
-    for (var n = 0; n < num; n ++) {
+    for (let n = 0; n < num; n ++) {
         if (connectionMatrix[a][n]) {
             if (dfs(n, b, temp)) {
                 connectedMatrix[a][b] = true;
@@ -24,14 +24,14 @@ function dfs(a, b, seen) {
 var nextEdge;
 function setup() {
     resize(window.innerWidth, window.innerHeight);
-    num = 80;
-    for (var n = 0; n < num; n ++) {
+    num = 180;
+    for (let n = 0; n < num; n ++) {
         nodes.push({x: random(width), y: random(height)});
         connectionMatrix.push(new Array(num).fill(false));
         connectedMatrix.push(new Array(num).fill(false));
     }
-    for (var n = 0; n < num; n ++) {
-        for (var o = 0; o < n; o ++) {
+    for (let n = 0; n < num; n ++) {
+        for (let o = 0; o < n; o ++) {
             potentialEdges.push({a: n, b: o, dist: dist(nodes[n].x, nodes[n].y, nodes[o].x, nodes[o].y)});
         }
     }
@@ -43,7 +43,7 @@ var done = false;
 function update() {
     if (!done) {
         done = true;
-        for (var n = 0; n < num; n ++) {
+        for (let n = 0; n < num; n ++) {
             if (!dfs(0, n, new Array(num).fill(false))) {
                 console.log(n);
                 done = false;
@@ -66,8 +66,8 @@ function draw() {
     nodes.forEach(function(node){
         ellipse(node.x, node.y, 15);
     });
-    for (var n = 0; n < num; n ++) {
-        for (var o = 0; o < n; o ++) {
+    for (let n = 0; n < num; n ++) {
+        for (let o = 0; o < n; o ++) {
             if (connectionMatrix[n][o])
                 line(nodes[n].x, nodes[n].y, nodes[o].x, nodes[o].y);
         }
@@ -75,9 +75,6 @@ function draw() {
     if (nextEdge) {
         stroke(255,0,0);
         lineWidth(5);
-        var n = nextEdge.a;
-        var o = nextEdge.b;
-        //if (connectionMatrix[n][o])
-            line(nodes[n].x, nodes[n].y, nodes[o].x, nodes[o].y);
+        line(nodes[nextEdge.a].x, nodes[nextEdge.a].y, nodes[nextEdge.b].x, nodes[nextEdge.b].y);
     }
 }

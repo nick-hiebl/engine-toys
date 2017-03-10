@@ -7,7 +7,7 @@ function setup() {
     fontSize(fSize);
     resize(window.innerWidth, window.innerHeight);
     for (var x = 0; x < width; x += fSize) {
-        var s = [], n = floor(random(10, 20)), sp = random(3, 12);
+        var s = [], n = floor(random(10, 20)), sp = random(3, 6);
         for (var i = 0; i < n; i ++) {
             s.push({
                 char: char(), y: -i * fSize, speed: sp, loopSpeed: random(1/50,1/10), loop: 0
