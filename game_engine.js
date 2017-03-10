@@ -162,19 +162,30 @@ class Vector {
         this.y = y;
     }
 
+    static unit() {
+        return new Vector(1, 0);
+    }
+
+    static randUnit() {
+        return new Vector(1, 0).rotate(random(0, 2 * Math.PI));
+    }
+
     add(other) {
         this.x += other.x;
         this.y += other.y;
+        return this;
     }
 
     sub(other) {
         this.x -= other.x;
         this.y -= other.y;
+        return this;
     }
 
     mul(factor) {
         this.x *= factor;
         this.y *= factor;
+        return this;
     }
 
     mag() {
@@ -189,6 +200,7 @@ class Vector {
             this.x /= mag;
             this.y /= mag;
         }
+        return this;
     }
 
     get magnitude() {
@@ -197,6 +209,7 @@ class Vector {
 
     set magnitude(n) {
         this.normalise(n);
+        return this.magnitude;
     }
 
     rotate(theta) {
@@ -204,6 +217,7 @@ class Vector {
         var y = this.y;
         this.x = x * Math.cos(theta) - y * Math.sin(theta);
         this.y = x * Math.sin(theta) + y * Math.cos(theta);
+        return this;
     }
 
     get heading() {
@@ -213,6 +227,7 @@ class Vector {
     set heading(target) {
         var h = this.heading;
         this.rotate(target - h);
+        return this.heading;
     }
 
     dist(other) {
