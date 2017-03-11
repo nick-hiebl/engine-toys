@@ -11,9 +11,17 @@ function setup() {
     b = new Vector(random(0.6, 0.9) * width, random(0.3, 0.8) * height);
 }
 
+function keyPressed(key) {
+    if (key == 'R') {
+        setup();
+    }
+}
+
 function draw() {
     background(255);
     fill(0);
+    fontSize(15);
+    text('Press \'r\' to get a new line', 10, 30)
     stroke(0);
     lineWidth(3)
     ellipse(a.x, a.y, 5, 5);
@@ -28,8 +36,6 @@ function draw() {
     var dotProduct = dot(ba, ma);
     dotProduct /= ba.magnitude;
     //dotProduct /= ma.magnitude;
-    console.log(dotProduct);
-
     var c = ba.normalise(dotProduct).add(a);
     line(c.x, c.y, MOUSE.x, MOUSE.y);
     fill(255, 0, 0);
