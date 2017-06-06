@@ -80,6 +80,7 @@ function setup() {
 }
 
 function update() {
+    resize(window.innerWidth, window.innerHeight);
     l.gradient_descent(data);
     for (var i = 0; i < 10; i ++) p.gradient_descent(data);
 }
