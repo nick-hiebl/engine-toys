@@ -20,10 +20,10 @@ function draw() {
     stroke(255);
     save();
     translate(width/2, height);
-    tree(240, map(MOUSE.y, 0, height, 0.8, 0), map(MOUSE.x, 0, width, 0, PI/2), 10);
+    tree(240, map(MOUSE.y, 0, height, 0.8, 0), map(MOUSE.x, 0, width, 0, Math.PI), 10);
     restore();
     fill(255);
     fontSize(40);
     fontFace('Courier New')
-    centerText("Wow Nick! I can't believe you invented the fractal tree!", width/2, 60);
+    centerText("Mouse x indicates curliness, mouse y indicates size", width/2, 60);
 }
