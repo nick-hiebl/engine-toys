@@ -1,4 +1,4 @@
-var dx = 0, dy = 0;
+var dx = 1, dy = 0;
 
 function keyPressed(key) {
     switch(key) {
@@ -39,12 +39,22 @@ function move() {
     console.log("moving");
     head.x += dx;
     head.y += dy;
+    if (head.x < 0 || head.x >= tiles_x || head.y < 0 || head.y >= tiles_y) {
+        die();
+        return;
+    }
     tail.push(new Vector(head.x - dx, head.y - dy));
     if (head.x == apple.x && head.y == apple.y) {
         apple = newApple();
     }
     else {
         tail.splice(0, 1);
+    }
+    for (var t of tail) {
+        if (t.x == head.x && t.y == head.y) {
+            die();
+            return;
+        }
     }
 }
 function update() {
@@ -57,8 +67,15 @@ function update() {
 function draw() {
     background(255);
     fill(255, 0, 0);
-    rect(head.x *tx, head.y *ty, tx, ty);
-    for (var s of tail) rect(s.x *tx, s.y *ty, tx, ty);
+    nRect(head.x *tx, head.y *ty, tx, ty);
+    for (var s of tail) nRect(s.x *tx, s.y *ty, tx, ty);
     fill(0, 255, 0);
-    rect(apple.x *tx, apple.y *ty, tx, ty);
+    nRect(apple.x *tx, apple.y *ty, tx, ty);
+}
+function die() {
+    apple = newApple();
+    tail = [];
+    head = new Vector(floor(tiles_x/2), floor(tiles_y/2));
+    dx = 1;
+    dy = 0;
 }
