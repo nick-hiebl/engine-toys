@@ -13,7 +13,7 @@ var Square = function(x, y) {
         fill(255);
         save();
         translate(this.pos.x, this.pos.y);
-        rotate(this.vel.heading());
+        rotate(this.vel.heading);
         ellipse(0, 0, this.size.x, this.size.y);
         restore();
     }
@@ -22,11 +22,9 @@ var Square = function(x, y) {
         this.pos.add(this.vel);
         if (this.pos.x+this.padding > width || this.pos.x-this.padding < 0) {
             this.vel.x *= -1;
-            this.pos.x += 2 * this.vel.x;
             this.vel.normalise(this.max_vel);
         } if (this.pos.y+this.padding > height || this.pos.y-this.padding < 0) {
             this.vel.y *= -1;
-            this.pos.y += 2 * this.vel.y;
             this.pos.add(this.vel);
             this.vel.normalise(this.max_vel);
         }
@@ -39,6 +37,8 @@ function setup() {
         var temp = new Square(random(width/4, 3*width/4), random(height/4, 3*height/4));
         squares.push(temp);
     }
+    fill(1);
+    bg();
 }
 
 function update() {
