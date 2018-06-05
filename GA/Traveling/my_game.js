@@ -74,7 +74,7 @@ Route.prototype.calcFitness = function(a) {
 var population = [];
 var popsize = 500;
 
-var num_cities = 6;//floor(random(30, 50));
+var num_cities = 60;//floor(random(30, 50));
 var cities = [];
 
 function setup() {
