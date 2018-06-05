@@ -51,7 +51,7 @@ function writeText() {
     restore();
 }
 
-var my_image = new Sprite('cat-adult-landing-hero.jpg', 1, 1);
+var my_image = new Sprite('windows.png', 1, 1);
 var my_data;
 
 var spots = [];
@@ -66,7 +66,7 @@ function setup() {
     my_data = ctx.getImageData(0, 0, width, height).data;
 
     for (var i = 0; i < my_data.length/4; i ++) {
-        if (my_data[i*4] > 200) {
+        if (my_data[i*4] > 10) {
             spots.push({
                 pos: new Vector(i % width, floor(i / width)),
                 col: {
