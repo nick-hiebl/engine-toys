@@ -67,6 +67,7 @@ Route.prototype.calcFitness = function(a) {
     for (var i = 1; i < num_cities; i ++) {
         total += cities[this.route[i-1]].dist(cities[this.route[i]]);
     }
+    total += cities[this.route[0]].dist(cities[this.route[num_cities-1]]);
     //console.log(total);
     this.fitness = total;
 }
@@ -146,6 +147,11 @@ function draw() {
         //lineWidth(map(c1.dist(c2), 0, 150, 15, 5))
         line(c1.x, c1.y, c2.x, c2.y);
     }
+
+    c1 = cities[best.route[0]];
+    c2 = cities[best.route[num_cities - 1]];
+
+    line(c1.x, c1.y, c2.x, c2.y);
 
     text(population[0].fitness.toLocaleString(), 3, 20);
 }
