@@ -24,9 +24,11 @@ function dfs(a, b, seen) {
 var nextEdge;
 function setup() {
     resize(window.innerWidth, window.innerHeight);
-    num = 180;
+    num = min(300, floor(width * height / 10000));
+
+    let boundary = 20;
     for (let n = 0; n < num; n ++) {
-        nodes.push({x: random(width), y: random(height)});
+        nodes.push({x: random(boundary, width - boundary), y: random(boundary, height - boundary)});
         connectionMatrix.push(new Array(num).fill(false));
         connectedMatrix.push(new Array(num).fill(false));
     }
@@ -64,7 +66,7 @@ function draw() {
     stroke(255);
     lineWidth(10);
     nodes.forEach(function(node){
-        ellipse(node.x, node.y, 15);
+        ellipse(node.x, node.y, 8);
     });
     for (let n = 0; n < num; n ++) {
         for (let o = 0; o < n; o ++) {
